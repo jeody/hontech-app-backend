@@ -1,3 +1,5 @@
+const dotenv = require('dotenv');
+dotenv.config();
 const nodemailer = require('nodemailer');
 
 // Create Email Transporter
