@@ -1,15 +1,15 @@
-const dotenv = require('dotenv');
-dotenv.config();
+// const dotenv = require('dotenv');
+// dotenv.config();
 const nodemailer = require('nodemailer');
 
 // Create Email Transporter
 const sendEmail = async (subject, message, send_to, sent_from, reply_to) => {
   const transporter = nodemailer.createTransport({
-    host: process.env.EMAIL_HOST,
+    host: 'mail.supremecluster.com',
     port: 465,
     auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS,
+      user: 'hontech@jeody.com',
+      pass: '6LPlP7sd3)',
     },
   });
 
