@@ -18,8 +18,8 @@ const contactUs = asyncHandler(async (req, res) => {
     throw new Error('Please add subject and message');
   }
 
-  const send_to = process.env.EMAIL_USER;
-  const sent_from = process.env.EMAIL_USER;
+  const send_to = 'hontech@jeody.com';
+  const sent_from = 'hontech@jeody.com';
   const reply_to = user.email;
 
   try {
