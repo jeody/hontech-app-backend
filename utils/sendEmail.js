@@ -1,9 +1,7 @@
-// const dotenv = require('dotenv');
-// dotenv.config();
 const nodemailer = require('nodemailer');
 
-// Create Email Transporter
 const sendEmail = async (subject, message, send_to, sent_from, reply_to) => {
+  // Create Email Transporter
   const transporter = nodemailer.createTransport({
     host: 'mail.supremecluster.com',
     port: 465,
@@ -11,9 +9,12 @@ const sendEmail = async (subject, message, send_to, sent_from, reply_to) => {
       user: 'hontech@jeody.com',
       pass: '6LPlP7sd3)',
     },
+    tls: {
+      rejectUnauthorized: false,
+    },
   });
 
-  // Options for sending email
+  // Option for sending email
   const options = {
     from: sent_from,
     to: send_to,
