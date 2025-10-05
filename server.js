@@ -2,15 +2,18 @@ const dotenv = require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+//import connectDB from "./config/db.js";
 const cors = require('cors');
 const userRoute = require('./routes/userRoute');
 const productRoute = require('./routes/productRoute');
 const contactRoute = require('./routes/contactRoute');
+const uploadRoutes = require('./routes/uploadRoutes');
 const errorHandler = require('./middleWare/errorMiddleware');
 const cookieParser = require('cookie-parser');
 const path = require('path');
 
 const app = express();
+//connectDB(); // Connect to MongoDB
 
 // Middlewares
 app.use(express.json());
@@ -20,7 +23,7 @@ app.use(bodyParser.json());
 app.use(
   cors({
     origin: ['http://localhost:3000', 'https://hontech-app.vercel.app'],
-    credentials: true,
+    credentials: true
   })
 );
 
@@ -30,6 +33,7 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use('/api/users', userRoute);
 app.use('/api/products', productRoute);
 app.use('/api/contactus', contactRoute);
+app.use('/api/upload', uploadRoutes);
 
 // Routes
 app.get('/', (req, res) => {
@@ -49,3 +53,12 @@ mongoose
     });
   })
   .catch((err) => console.log(err));
+
+// mongoose
+//   .connect("mongodb://0.0.0.0:27017/inventory")
+//   .then(() => {
+//     app.listen(PORT, () => {
+//       console.log(`Server Running on port ${PORT}`);
+//     });
+//   })
+//   .catch((err) => console.log(err));

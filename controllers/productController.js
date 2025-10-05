@@ -23,7 +23,7 @@ const createProduct = asyncHandler(async (req, res) => {
     totalActualPrice,
     totalRetailPrice,
     totalProfit,
-    totalPercentage,
+    totalPercentage
   } = req.body;
 
   // validation
@@ -46,12 +46,12 @@ const createProduct = asyncHandler(async (req, res) => {
   // Handle Image Upload
   let fileData = {};
   if (req.file) {
-    // Save image to cloudinary
+    // Save image to cloudinary or
     let uploadedFile;
     try {
       uploadedFile = await cloudinary.uploader.upload(req.file.path, {
         folder: 'Hontech App',
-        resource_type: 'image',
+        resource_type: 'image'
       });
     } catch (error) {
       res.status(500);
@@ -62,7 +62,7 @@ const createProduct = asyncHandler(async (req, res) => {
       fileName: req.file.originalname,
       filePath: uploadedFile.secure_url,
       fileType: req.file.mimetype,
-      fileSize: fileSizeFormatter(req.file.size, 2),
+      fileSize: fileSizeFormatter(req.file.size, 2)
     };
   }
 
@@ -88,7 +88,7 @@ const createProduct = asyncHandler(async (req, res) => {
     totalActualPrice,
     totalRetailPrice,
     totalProfit,
-    totalPercentage,
+    totalPercentage
   });
 
   res.status(201).json(product);
@@ -96,7 +96,8 @@ const createProduct = asyncHandler(async (req, res) => {
 
 // Get all products
 const getProducts = asyncHandler(async (req, res) => {
-  const products = await Product.find({ user: req.user.id }).sort('-createdAt');
+  //const products = await Product.find({ user: req.user.id }).sort("-createdAt");
+  const products = await Product.find().sort('-createdAt');
   res.status(200).json(products);
 });
 
@@ -155,7 +156,7 @@ const updateProduct = asyncHandler(async (req, res) => {
     totalActualPrice,
     totalRetailPrice,
     totalProfit,
-    totalPercentage,
+    totalPercentage
   } = req.body;
   const { id } = req.params;
   const product = await Product.findById(id);
@@ -180,7 +181,7 @@ const updateProduct = asyncHandler(async (req, res) => {
     try {
       uploadedFile = await cloudinary.uploader.upload(req.file.path, {
         folder: 'Hontech App',
-        resource_type: 'image',
+        resource_type: 'image'
       });
     } catch (error) {
       res.status(500);
@@ -191,7 +192,7 @@ const updateProduct = asyncHandler(async (req, res) => {
       fileName: req.file.originalname,
       filPath: uploadedFile.secure_url,
       fileType: req.file.mimetype,
-      fileSize: fileSizeFormatter(req.file.size, 2),
+      fileSize: fileSizeFormatter(req.file.size, 2)
     };
   }
 
@@ -216,11 +217,11 @@ const updateProduct = asyncHandler(async (req, res) => {
       totalActualPrice,
       totalRetailPrice,
       totalProfit,
-      totalPercentage,
+      totalPercentage
     },
     {
       new: true,
-      runValidators: true,
+      runValidators: true
     }
   );
   res.status(201).json(updatedProduct);
@@ -231,5 +232,5 @@ module.exports = {
   getProducts,
   getProduct,
   deleteProduct,
-  updateProduct,
+  updateProduct
 };
